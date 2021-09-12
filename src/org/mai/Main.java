@@ -3,6 +3,7 @@ package org.mai;
 import org.mai.exceptions.DifferentCurrenciesException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Currency;
 
 /**
@@ -16,11 +17,11 @@ public class Main {
         Money usdMoney = new Money(usd, new BigDecimal(100));
         Money tenDollars = new Money(usd, new BigDecimal(10));
         Money tenPound = new Money(gbp, new BigDecimal(10));
-        CurrencyExchangeRate poundToUsd = new CurrencyExchangeRate(new BigDecimal(1.5), gbp, usd);
+        CurrencyExchangeRate poundToUsd = new CurrencyExchangeRate(new BigDecimal("1.5"), gbp, usd);
 
         //should set usdMoney 110 with scale 2
         usdMoney = usdMoney.add(tenDollars);
-        System.out.println(usdMoney.getAmount().equals(new BigDecimal(110).setScale(2)));
+        System.out.println(usdMoney.getAmount().equals(new BigDecimal(110).setScale(2, RoundingMode.HALF_UP)));
 
         //should throw DifferentCurrenciesException
         try {
@@ -31,6 +32,6 @@ public class Main {
 
         //should set usdMoney 95 with scale 2
         usdMoney = usdMoney.subtract(poundToUsd.convert(tenPound));
-        System.out.println(usdMoney.getAmount().equals(new BigDecimal(95).setScale(2)));
+        System.out.println(usdMoney.getAmount().equals(new BigDecimal(95).setScale(2, RoundingMode.HALF_UP)));
     }
 }
