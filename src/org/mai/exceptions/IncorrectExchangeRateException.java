@@ -1,4 +1,4 @@
-package org.mai.dep210.cer;
+package org.mai.exceptions;
 
 /**
  * Created by Asus on 9/17/2018.

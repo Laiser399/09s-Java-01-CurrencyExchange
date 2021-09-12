@@ -1,4 +1,6 @@
-package org.mai.dep210.cer;
+package org.mai;
+
+import org.mai.exceptions.DifferentCurrenciesException;
 
 import java.math.BigDecimal;
 import java.util.Currency;
